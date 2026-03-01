@@ -34,8 +34,8 @@ const Contact = () => {
     <section className="py-24 bg-[#fffcf5] relative overflow-hidden" id="contact">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#e09f3e]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#335c67]/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-[-10%] left-[-5%] w-[500px] h-125 bg-[#e09f3e]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-10%] right-[-5%] w-125 h-[500px] bg-[#335c67]/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="w-full max-w-4xl mx-auto px-6 relative z-10">

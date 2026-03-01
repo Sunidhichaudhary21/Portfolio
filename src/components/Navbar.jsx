@@ -10,6 +10,17 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Close menu when scrolling
+    if (isOpen) {
+      const handleScroll = () => {
+        setIsOpen(false);
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
@@ -53,7 +64,8 @@ const Navbar = () => {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -80;
+      const isMobile = window.innerWidth < 768;
+      const yOffset = isMobile ? -70 : -80;
       const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
       setActiveSection(id);
@@ -72,19 +84,18 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
-      <div className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 flex justify-between items-center">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${scrolled ? 'bg-white shadow-lg' : 'bg-white/85 shadow-sm'}`} style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 0.75rem)', paddingLeft: 'max(env(safe-area-inset-left, 0), 0)', paddingRight: 'max(env(safe-area-inset-right, 0), 0)' }}>
+      <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-12 flex justify-between items-center py-3 md:py-4">
         {/* Logo */}
-        {/* Logo */}
-        <div className="cursor-pointer z-50 flex items-center gap-3 group" onClick={() => handleNavigation('home')}>
+        <div className="cursor-pointer z-50 flex items-center gap-2 md:gap-3 group" onClick={() => handleNavigation('home')}>
           {/* SC Monogram Icon */}
-          <div className="relative w-10 h-10 flex items-center justify-center bg-[#335c67] text-[#fffcf5] font-black text-lg tracking-tighter rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-[#e09f3e] group-hover:rotate-3 shadow-md">
+          <div className="relative w-8 md:w-10 h-8 md:h-10 flex items-center justify-center bg-[#335c67] text-[#fffcf5] font-black text-sm md:text-lg tracking-tighter rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-[#e09f3e] group-hover:rotate-3 shadow-md">
             <span className="relative z-10">SC</span>
           </div>
 
           {/* Text Logo */}
           <div className="flex flex-col leading-none">
-            <span className="text-xl font-black text-[#335c67] tracking-tight group-hover:text-[#e09f3e] transition-colors duration-300">
+            <span className="text-lg md:text-xl font-black text-[#335c67] tracking-tight group-hover:text-[#e09f3e] transition-colors duration-300">
               Sunidhi
             </span>
           </div>
@@ -106,28 +117,58 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden z-50">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-[#335c67] hover:text-[#e09f3e] transition-colors p-2"
-          >
-            {isOpen ? <FiX size={26} /> : <FiMenu size={26} />}
-          </button>
-        </div>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden z-50 text-[#335c67] hover:text-[#e09f3e] transition-colors p-2 h-12 w-12 flex items-center justify-center active:scale-95 relative"
+          aria-label="Toggle navigation menu"
+        >
+          {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
+
+        {/* Blur Backdrop */}
+        {isOpen && (
+          <div 
+            className="fixed inset-0 bg-black/40 backdrop-blur-md z-[998] md:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+        )}
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-[#fffcf5] z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] md:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-          {navItems.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavigation(item.id)}
-              className={`text-3xl font-black text-[#335c67] hover:text-[#e09f3e] transition-all duration-300 transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
+        {isOpen && (
+          <div 
+            className="fixed inset-0 bg-white z-[999] flex flex-col items-center justify-start gap-0 md:hidden animate-fadeIn"
+            style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 5rem)' }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsOpen(false);
+            }}
+          >
+            <div className="flex flex-col items-center gap-0 w-full">
+              {navItems.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    handleNavigation(item.id);
+                    setIsOpen(false);
+                  }}
+                  className="w-full py-5 px-6 text-2xl font-bold text-[#335c67] hover:text-[#e09f3e] hover:bg-[#f5f5f5] active:bg-[#eeeeee] transition-all duration-150 border-b border-gray-200 last:border-b-0"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+            
+            {/* Close button area at bottom */}
+            <div className="absolute top-4 right-4 z-50">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-[#335c67] hover:text-[#e09f3e] p-2 transition-colors"
+              >
+                <FiX size={28} />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

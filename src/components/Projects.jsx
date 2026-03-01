@@ -17,6 +17,7 @@ const Projects = () => {
       description: 'Comprehensive dashboard for Leetcode users. Tracks problem-solving stats, visualizes progress, and provides personalized insights to boost coding skills.',
       tags: ['HTML', 'CSS', 'JavaScript'],
       github: 'https://github.com/Sunidhichaudhary21/Leetcode_metric.git',
+      image: null, // Add your image path here
       color: '#335c67'
     },
     {
@@ -25,6 +26,7 @@ const Projects = () => {
       description: 'Personal portfolio website built with React and Tailwind CSS. Showcases projects, skills, and experience with a clean, responsive design.',
       tags: ['React', 'GSAP', 'Tailwind', 'Framer Motion','JavaScript'],
       github: 'https://github.com/Sunidhichaudhary21',
+      image: null, // Add your image path here
       color: '#e09f3e'
     },
     {
@@ -33,6 +35,7 @@ const Projects = () => {
       description: 'A Sustainable Clothing Marketplace built with React and Node.js. Connects eco-conscious buyers and sellers, offering a platform for sustainable fashion with secure transactions and user-friendly design.',
       tags: ['Node.js', 'React.js', 'TypeScript', 'Api'],
       github: 'https://github.com/Sunidhichaudhary21',
+      image: null, // Add your image path here
       color: '#9e2a2b'
     }
   ];
@@ -142,32 +145,34 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Right: Abstract Card - using color prop */}
+                {/* Right: Project Image or Abstract Card */}
                 <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl shadow-[#335c67]/20 group-hover:-translate-y-2 transition-transform duration-500 ease-out bg-white p-2 border-2 border-[#fff3b0]">
-                  <div className={`w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden`} style={{ background: `linear-gradient(135deg, ${project.color}15, ${project.color}05)` }}>
-                    {/* Decorative Circles */}
-                    <div className="absolute top-[-20%] right-[-20%] w-[80%] h-[80%] rounded-full opacity-10" style={{ backgroundColor: project.color }}></div>
-                    <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-10" style={{ backgroundColor: project.color }}></div>
-
-                    <div className="text-center z-10 transform group-hover:scale-110 transition-transform duration-700">
-                      <h4 className="text-3xl font-bold text-[#335c67]/80 mb-2">{project.title}</h4>
-                      <span className="text-sm font-mono text-[#e09f3e]">Preview</span>
+                  {project.image ? (
+                    // Show actual project image
+                    <div className="w-full h-full rounded-2xl overflow-hidden">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
                     </div>
-                  </div>
+                  ) : (
+                    // Fallback: Abstract gradient card with circles
+                    <div className={`w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden`} style={{ background: `linear-gradient(135deg, ${project.color}15, ${project.color}05)` }}>
+                      {/* Decorative Circles */}
+                      <div className="absolute top-[-20%] right-[-20%] w-[80%] h-[80%] rounded-full opacity-10" style={{ backgroundColor: project.color }}></div>
+                      <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full opacity-10" style={{ backgroundColor: project.color }}></div>
+
+                      <div className="text-center z-10 transform group-hover:scale-110 transition-transform duration-700">
+                        <h4 className="text-3xl font-bold text-[#335c67]/80 mb-2">{project.title}</h4>
+                        <span className="text-sm font-mono text-[#e09f3e]">Preview</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Desktop View All Button (Below Scroll) */}
-        <div className="w-full py-20 bg-[#fffcf5] flex justify-center">
-          <Link to="/all-projects" className="group relative inline-flex items-center justify-center gap-4 px-12 py-6 bg-[#335c67] text-white rounded-full font-bold text-xl overflow-hidden shadow-2xl hover:bg-[#e09f3e] transition-all duration-300">
-            <span className="relative z-10 flex items-center gap-3">
-              View All Projects <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-[#e09f3e] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-          </Link>
+          ))}         
         </div>
       </div>
 
@@ -182,9 +187,21 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div key={project.id} className="project-card-mobile group">
               <div className="bg-white rounded-2xl overflow-hidden shadow-xl shadow-[#335c67]/5 border border-[#335c67]/5 mb-6 relative">
-                <div className="h-48 flex items-center justify-center" style={{ backgroundColor: `${project.color}10` }}>
-                  <h4 className="text-xl font-bold text-[#335c67]/60">{project.title}</h4>
-                </div>
+                {project.image ? (
+                  // Show actual project image
+                  <div className="h-48 overflow-hidden bg-gray-100">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ) : (
+                  // Fallback: gradient background with title
+                  <div className="h-48 flex items-center justify-center" style={{ backgroundColor: `${project.color}10` }}>
+                    <h4 className="text-xl font-bold text-[#335c67]/60">{project.title}</h4>
+                  </div>
+                )}
                 <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm">
                   <FiExternalLink className="text-[#335c67]" />
                 </div>
@@ -205,12 +222,6 @@ const Projects = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="text-center" data-aos="fade-up">
-          <Link to="/all-projects" className="inline-flex items-center gap-2 px-8 py-4 bg-[#335c67] text-white font-bold rounded-full shadow-lg shadow-[#335c67]/30 hover:bg-[#e09f3e] transition-all duration-300">
-            View All Projects <FiArrowRight />
-          </Link>
         </div>
       </div>
     </section>
