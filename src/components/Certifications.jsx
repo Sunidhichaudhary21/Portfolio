@@ -8,6 +8,7 @@ import fullStackImg from '../assets/gfg.jpg';
 import hack from '../assets/hack.jpg';
 import Ai from '../assets/Ai.png';
 import free from '../assets/fcc.jpeg';
+import Hack from '../assets/Java.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,6 +48,15 @@ const certificates = [
     image: free, // Placeholder
     link: "https://www.freecodecamp.org/certification/fccef30f3af-5514-49d5-af80-2ddfb59bc92d/responsive-web-design",
     description: "Building responsive and accessible web interfaces using HTML, CSS, and JavaScript."
+    },
+    {
+    id: 5,
+    title: "Java (Basic)",
+    issuer: "HackerRank",
+    date: "Feb 2026",
+    image: Hack,
+    link: "https://www.hackerrank.com/certificates/iframe/f662fc320706",
+    description: "Demonstrated proficiency in Java programming fundamentals and core concepts."
     }
 
 ];
