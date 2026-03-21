@@ -42,7 +42,7 @@ const skillCategories = [
     title: 'DevOps',
     subtitle: 'Infrastructure',
     icon: <FiCpu className="w-8 h-8" />,
-    skills: ['Docker', 'AWS', 'Git / GitHub', 'Linux'],
+    skills: [ 'AWS', 'Git / GitHub', 'Linux'],
     bg: 'bg-[#2a9d8f]',
     text: 'text-white',
     accent: 'text-[#335c67]'

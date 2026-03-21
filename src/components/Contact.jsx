@@ -117,7 +117,7 @@ const Contact = () => {
 
               <div>
                 <h3 className="text-2xl font-bold mb-2">Contact Info</h3>
-                <p className="text-white/60 text-sm mb-12">Scan the QR or click below to connect instantly.</p>
+                <p className="text-white/60 text-sm mb-12">connect instantly.</p>
 
                 <div className="space-y-8">
                   <a href="mailto:csunidhi22@gmail.com" className="flex items-center gap-4 group">
