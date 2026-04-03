@@ -96,7 +96,7 @@ const Hero = () => {
 
                             <p className="hero-desc text-lg md:text-2xl lg:text-3xl font-medium text-white/90 leading-[1.4] max-w-lg mt-2 mb-8">
                                 I develop modern, user <br className="hidden md:block" />
-                                interfaces and web applications
+                                interfaces and web applications. Let's create something amazing together.
                             </p>
                         </div>
                     </div>
