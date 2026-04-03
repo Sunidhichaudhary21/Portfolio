@@ -17,7 +17,7 @@ const Projects = () => {
       tags: ['HTML', 'CSS', 'JavaScript'],
       github: 'https://github.com/Sunidhichaudhary21/Leetcode_metric.git',
       image: null,
-      color: '#335c67',
+      color: '#00f6ff',
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ const Projects = () => {
       tags: ['React', 'GSAP', 'Tailwind', 'Framer Motion', 'JavaScript'],
       github: 'https://github.com/Sunidhichaudhary21/Portfolio.git',
       image: null,
-      color: '#e09f3e',
+      color: '#915eff',
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ const Projects = () => {
       tags: ['React.js', 'Node.js', 'TypeScript', 'API', 'MongoDB', 'PostgreSQL', 'Express.js', 'React.js', 'Prisma'],
       github: 'https://github.com/Sunidhichaudhary21/FocusFlow.git',
       image: null,
-      color: '#9e2a2b',
+      color: '#ff00ea',
     },
   ];
 
@@ -82,21 +82,21 @@ const Projects = () => {
     <section
       ref={componentRef}
       id="projects"
-      className="relative overflow-hidden bg-[#fffaf1] py-24 md:py-28"
+      className="relative overflow-hidden bg-[#050816] py-24 md:py-28"
     >
-      <div className="pointer-events-none absolute -left-32 -top-32 h-72 w-72 rounded-full bg-[#335c67]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-36 -right-32 h-80 w-80 rounded-full bg-[#e09f3e]/15 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 -top-32 h-72 w-72 rounded-full bg-[#915eff] blur-[120px] opacity-20" />
+      <div className="pointer-events-none absolute -bottom-36 -right-32 h-80 w-80 rounded-full bg-[#00f6ff] blur-[120px] opacity-20" />
 
       <div className="relative mx-auto max-w-6xl px-6 md:px-10">
         <div className="projects-heading mb-14 md:mb-16">
-          <span className="mb-3 inline-flex items-center rounded-full border border-[#335c67]/20 bg-white/70 px-4 py-1 text-xs font-bold uppercase tracking-[0.25em] text-[#e09f3e]">
+          <span className="mb-3 inline-flex items-center rounded-full border border-[#00f6ff]/30 bg-[#00f6ff]/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.25em] text-[#00f6ff] shadow-[0_0_10px_rgba(0,246,255,0.2)]">
             Selected Work
           </span>
-          <h2 className="max-w-3xl text-4xl font-black leading-tight text-[#1d3b42] md:text-6xl">
+          <h2 className="max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl pt-2">
             Projects Built With
-            <span className="block text-[#e09f3e]">Performance And Purpose</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#915eff] to-[#00f6ff]">Performance And Purpose</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#335c67]/75 md:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#aaa6c3] md:text-lg">
             Every project balances usability, visual polish, and clean implementation. Explore the highlights below.
           </p>
         </div>
@@ -105,28 +105,28 @@ const Projects = () => {
           {projects.map((project, index) => (
             <article
               key={project.id}
-              className="project-card group relative overflow-hidden rounded-3xl border border-[#335c67]/10 bg-white/95 shadow-[0_24px_70px_-40px_rgba(20,34,43,0.7)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_75px_-35px_rgba(20,34,43,0.75)]"
+              className="project-card group relative overflow-hidden rounded-3xl border border-white/5 bg-[#151030]/60 backdrop-blur-md shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#915eff]/30 hover:shadow-[0_15px_40px_rgba(145,94,255,0.15)]"
             >
               <div
-                className="relative flex h-44 items-end overflow-hidden p-6"
-                style={{ background: `linear-gradient(145deg, ${project.color}2B, ${project.color}12)` }}
+                className="relative flex h-44 items-end overflow-hidden p-6 border-b border-white/5"
+                style={{ background: `linear-gradient(145deg, ${project.color}22, ${project.color}05)` }}
               >
-                <div className="absolute right-4 top-4 text-6xl font-black text-[#1d3b42]/10">
+                <div className="absolute right-4 top-4 text-6xl font-black text-white/5 select-none">
                   0{index + 1}
                 </div>
-                <h3 className="relative text-3xl font-black text-[#1f4048] transition-colors duration-300 group-hover:text-[#e09f3e]">
+                <h3 className="relative text-3xl font-black text-white transition-colors duration-300 group-hover:text-[#00f6ff]">
                   {project.title}
                 </h3>
               </div>
 
               <div className="space-y-6 p-6">
-                <p className="text-sm leading-relaxed text-[#335c67]/80">{project.description}</p>
+                <p className="text-sm leading-relaxed text-[#aaa6c3] line-clamp-4">{project.description}</p>
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={`${project.id}-${tag}`}
-                      className="rounded-full border border-[#335c67]/15 bg-[#fffcf5] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#335c67]/80"
+                      className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80"
                     >
                       {tag}
                     </span>
@@ -138,12 +138,12 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#1f4048] px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#e09f3e]"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#100d25] border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#915eff] hover:text-white hover:border-[#915eff] hover:shadow-[0_0_15px_rgba(145,94,255,0.4)]"
                   >
                     <FiGithub size={16} />
                     View Code
                   </a>
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#335c67]/15 text-[#335c67]/60 transition-colors duration-300 group-hover:border-[#e09f3e]/50 group-hover:text-[#e09f3e]">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-[#100d25] text-[#aaa6c3] transition-all duration-300 group-hover:border-[#00f6ff]/50 group-hover:text-[#00f6ff] group-hover:bg-[#00f6ff]/10 group-hover:shadow-[0_0_15px_rgba(0,246,255,0.3)]">
                     <FiExternalLink size={16} />
                   </span>
                 </div>

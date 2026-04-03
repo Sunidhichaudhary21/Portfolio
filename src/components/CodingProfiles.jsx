@@ -43,23 +43,23 @@ const codingProfiles = [
 
 const CodingProfiles = () => {
   return (
-    <section id="coding-profiles" className="relative overflow-hidden bg-white py-24">
+    <section id="coding-profiles" className="relative overflow-hidden bg-[#100d25] py-24">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#335c67]/10 blur-3xl" />
-        <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-[#e09f3e]/15 blur-3xl" />
+        <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#915eff] blur-[120px] opacity-20" />
+        <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-[#ff00ea] blur-[120px] opacity-10" />
       </div>
 
       <div className="relative mx-auto w-full max-w-screen-2xl px-6 md:px-12">
         <div className="mb-14 flex flex-col items-start gap-5 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#335c67]/15 bg-[#fffcf5] px-4 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#e09f3e]">
+            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#ff00ea]/30 bg-[#ff00ea]/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#ff00ea] shadow-[0_0_10px_rgba(255,0,234,0.2)]">
               <FiCode size={14} />
               Competitive Coding
             </span>
-            <h2 className="text-4xl font-black leading-tight text-[#335c67] md:text-5xl">
+            <h2 className="text-4xl font-black leading-tight text-white md:text-5xl">
               Coding Profiles
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#335c67]/75 md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#aaa6c3] md:text-lg">
               Platforms where I practice problem solving, strengthen DSA fundamentals, and stay contest-ready.
             </p>
           </div>
@@ -71,27 +71,27 @@ const CodingProfiles = () => {
             return (
               <article
                 key={profile.id}
-                className="group rounded-3xl border border-[#335c67]/10 bg-white p-6 shadow-[0_22px_60px_-38px_rgba(29,59,66,0.55)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_70px_-35px_rgba(29,59,66,0.6)]"
+                className="group rounded-3xl border border-white/5 bg-[#151030] backdrop-blur-sm p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#ff00ea]/30 hover:shadow-[0_28px_70px_-25px_rgba(255,0,234,0.2)]"
               >
                 <div className={`mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br ${profile.accent} text-white shadow-lg`}>
                   <Icon size={24} />
                 </div>
 
-                <h3 className="text-2xl font-black text-[#335c67] transition-colors duration-300 group-hover:text-[#e09f3e]">
+                <h3 className="text-2xl font-black text-white transition-colors duration-300 group-hover:text-[#ff00ea]">
                   {profile.name}
                 </h3>
 
-                <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-[#335c67]/55">
+                <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-white/40">
                   @{profile.handle}
                 </p>
 
-                <p className="mt-5 text-sm text-[#335c67]/75">{profile.scoreLabel}</p>
+                <p className="mt-5 text-sm text-[#aaa6c3]">{profile.scoreLabel}</p>
 
                 <a
                   href={profile.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#335c67] px-4 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#e09f3e]"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#050816] border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:border-[#ff00ea] hover:bg-[#ff00ea]/10 hover:text-[#ff00ea] hover:shadow-[0_0_15px_rgba(255,0,234,0.4)]"
                 >
                   View Profile
                   <FiArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -84,18 +84,18 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${scrolled ? 'bg-white shadow-lg' : 'bg-white/85 shadow-sm'}`} style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 0.75rem)', paddingLeft: 'max(env(safe-area-inset-left, 0), 0)', paddingRight: 'max(env(safe-area-inset-right, 0), 0)' }}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${scrolled ? 'bg-[#050816]/95 shadow-lg backdrop-blur-md border-b border-white/5' : 'bg-[#050816]/80 backdrop-blur-sm shadow-sm'}`} style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 0.75rem)', paddingLeft: 'max(env(safe-area-inset-left, 0), 0)', paddingRight: 'max(env(safe-area-inset-right, 0), 0)' }}>
       <div className="w-full max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-12 flex justify-between items-center py-3 md:py-4">
         {/* Logo */}
         <div className="cursor-pointer z-50 flex items-center gap-2 md:gap-3 group" onClick={() => handleNavigation('home')}>
           {/* SC Monogram Icon */}
-          <div className="relative w-8 md:w-10 h-8 md:h-10 flex items-center justify-center bg-[#335c67] text-[#fffcf5] font-black text-sm md:text-lg tracking-tighter rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-[#e09f3e] group-hover:rotate-3 shadow-md">
+          <div className="relative w-8 md:w-10 h-8 md:h-10 flex items-center justify-center bg-white/5 text-white font-black text-sm md:text-lg tracking-tighter rounded-lg overflow-hidden transition-all duration-300 group-hover:bg-[#915eff] group-hover:rotate-3 shadow-md border border-white/10 group-hover:shadow-[0_0_15px_#915eff55]">
             <span className="relative z-10">SC</span>
           </div>
 
           {/* Text Logo */}
           <div className="flex flex-col leading-none">
-            <span className="text-lg md:text-xl font-black text-[#335c67] tracking-tight group-hover:text-[#e09f3e] transition-colors duration-300">
+            <span className="text-lg md:text-xl font-black text-white tracking-tight group-hover:text-[#915eff] transition-colors duration-300">
               Sunidhi
             </span>
           </div>
@@ -107,11 +107,11 @@ const Navbar = () => {
             <button
               key={item.id}
               onClick={() => handleNavigation(item.id)}
-              className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 relative group ${activeSection === item.id ? 'text-[#e09f3e]' : 'text-[#335c67] hover:text-[#e09f3e]'
+              className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 relative group flex items-center ${activeSection === item.id ? 'text-[#915eff]' : 'text-white/70 hover:text-white'
                 }`}
             >
               {item.name}
-              <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#e09f3e] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${activeSection === item.id ? 'opacity-100' : ''}`}></span>
+              <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#915eff] shadow-[0_0_8px_#915eff] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${activeSection === item.id ? 'opacity-100' : ''}`}></span>
             </button>
           ))}
         </div>
@@ -119,7 +119,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden z-50 text-[#335c67] hover:text-[#e09f3e] transition-colors p-2 h-12 w-12 flex items-center justify-center active:scale-95 relative"
+          className="md:hidden z-50 text-white hover:text-[#915eff] transition-colors p-2 h-12 w-12 flex items-center justify-center active:scale-95 relative"
           aria-label="Toggle navigation menu"
         >
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -128,7 +128,7 @@ const Navbar = () => {
         {/* Blur Backdrop */}
         {isOpen && (
           <div 
-            className="fixed inset-0 bg-black/40 backdrop-blur-md z-[998] md:hidden"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[998] md:hidden"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -136,7 +136,7 @@ const Navbar = () => {
         {/* Mobile Menu Overlay */}
         {isOpen && (
           <div 
-            className="fixed inset-0 bg-white z-[999] flex flex-col items-center justify-start gap-0 md:hidden animate-fadeIn"
+            className="fixed inset-0 bg-[#050816] z-[999] flex flex-col items-center justify-start gap-0 md:hidden animate-fadeIn"
             style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 5rem)' }}
             onClick={(e) => {
               if (e.target === e.currentTarget) setIsOpen(false);
@@ -150,7 +150,7 @@ const Navbar = () => {
                     handleNavigation(item.id);
                     setIsOpen(false);
                   }}
-                  className="w-full py-5 px-6 text-2xl font-bold text-[#335c67] hover:text-[#e09f3e] hover:bg-[#f5f5f5] active:bg-[#eeeeee] transition-all duration-150 border-b border-gray-200 last:border-b-0"
+                  className="w-full py-5 px-6 text-2xl font-bold text-white hover:text-[#915eff] hover:bg-white/5 active:bg-white/10 transition-all duration-150 border-b border-white/5 last:border-b-0"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {item.name}
@@ -162,7 +162,7 @@ const Navbar = () => {
             <div className="absolute top-4 right-4 z-50">
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-[#335c67] hover:text-[#e09f3e] p-2 transition-colors"
+                className="text-white hover:text-[#915eff] p-2 transition-colors"
               >
                 <FiX size={28} />
               </button>
