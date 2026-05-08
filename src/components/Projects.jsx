@@ -15,7 +15,7 @@ const Projects = () => {
       description:
         'Developed a full-stack AI-powered application to generate UGC-style short promotional videos using product and model images. Implemented secure user authentication and account management using Clerk Auth. Integrated Gemini API to automate ad script generation and streamline video content creation. Managed PostgreSQL database for storing user profiles, generated projects, and application data securely.',
       tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'Gemini API', 'Clerk Auth', 'REST APIs', 'VPS Deployment'],
-      github: 'https://github.com/Sunidhichaudhary21/UGC-AI-Powered-Short-Video-Ads-Generator.git',
+      github: 'https://github.com/Sunidhichaudhary21/UGC-ADS.git',
       image: null,
       color: '#00f6ff',
     },

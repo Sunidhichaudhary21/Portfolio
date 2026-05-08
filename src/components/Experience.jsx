@@ -67,7 +67,7 @@ const Experience = () => {
                 Focus Areas
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {['React.js', 'Responsive UI', 'Component Design', 'Performance', 'Debugging', 'Git / GitHub'].map((skill) => (
+                {['React.js', 'Responsive UI', 'Component Design', 'Performance', 'Debugging', 'Git / GitHub', 'Clerk Auth', 'Gemini API', 'PostgreSQL', 'REST APIs', 'VPS Deployment', 'UI/UX'].map((skill) => (
                   <span
                     key={skill}
                     className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white/80"
