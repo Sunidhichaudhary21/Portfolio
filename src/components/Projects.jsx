@@ -11,17 +11,17 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Leetcode Metrics',
+      title: 'UGC-AI-Powered Short Video Ads Generator',
       description:
-        'Comprehensive dashboard for Leetcode users. Tracks problem-solving stats, visualizes progress, and provides personalized insights to boost coding skills.Integrated dynamic data visualization and interactive charts to present user performance trends effectively.Designed with a responsive and user-friendly interface using modern frontend technologies, ensuring seamless experience across devices.',
-      tags: ['HTML', 'CSS', 'JavaScript'],
-      github: 'https://github.com/Sunidhichaudhary21/Leetcode_metric.git',
+        'Developed a full-stack AI-powered application to generate UGC-style short promotional videos using product and model images. Implemented secure user authentication and account management using Clerk Auth. Integrated Gemini API to automate ad script generation and streamline video content creation. Managed PostgreSQL database for storing user profiles, generated projects, and application data securely.',
+      tags: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'Gemini API', 'Clerk Auth', 'REST APIs', 'VPS Deployment'],
+      github: 'https://github.com/Sunidhichaudhary21/UGC-AI-Powered-Short-Video-Ads-Generator.git',
       image: null,
       color: '#00f6ff',
     },
     {
       id: 2,
-      title: 'Portfolio',
+      title: 'Personal Portfolio',
       description:
         'Developed a modern and responsive personal portfolio website using React.js and Tailwind CSS to effectively showcase my projects, technical skills, and professional experience. The application features a clean and intuitive user interface with smooth navigation, optimized performance, and mobile-first design principles.Implemented reusable components, dynamic content rendering, and responsive layouts to ensure compatibility across various devices and screen sizes.',
       tags: ['React', 'GSAP', 'Tailwind', 'Framer Motion', 'JavaScript'],
@@ -31,7 +31,7 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: 'Focusflow',
+      title: 'FocusFlow-AI Powered Student Productivity Platform',
       description:
         'Built a full-stack productivity platform for students integrating notes, task management, and syllabus organization. Used React Query for server state management and built NLP-based task parsing to extract deadlines from natural language.',
       tags: ['React.js', 'Node.js', 'TypeScript', 'API', 'MongoDB', 'PostgreSQL', 'Express.js', 'React.js', 'Prisma'],
@@ -94,7 +94,7 @@ const Projects = () => {
           </span>
           <h2 className="max-w-3xl text-4xl font-black leading-tight text-white md:text-6xl pt-2">
             Projects Built With
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#915eff] to-[#00f6ff]">Performance And Purpose</span>
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-[#915eff] to-[#00f6ff]">Performance And Purpose</span>
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#aaa6c3] md:text-lg">
             Every project balances usability, visual polish, and clean implementation. Explore the highlights below.
