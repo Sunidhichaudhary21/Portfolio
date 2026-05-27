@@ -254,4 +254,41 @@ body {
 
 .animate-hologram-sweep {
   animation: hologram-sweep 3s ease-in-out infinite;
+}
+
+/* Loading Screen Wrapper */
+.loading-screen-wrapper {
+  position: fixed;
+  inset: 0;
+  background-color: #030014;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* Luxury logo SVG custom drawing path animation */
+@keyframes drawPath {
+  0% {
+    stroke-dashoffset: 300;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.logo-svg-path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawPath 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes spin-custom {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-loader {
+  animation: spin-custom 16s linear infinite;
 }

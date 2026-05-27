@@ -9,7 +9,7 @@ const About = () => {
     { value: '1+', label: 'Years Experience', desc: 'Active web development' },
     { value: '5+', label: 'Projects Built', desc: 'From design to deployment' },
     { value: '15+', label: 'Core Tech Stack', desc: 'Modern tools & frameworks' },
-    { value: '4', label: 'Coding Platforms', desc: 'Active solver' }
+    { value: '4+', label: 'Coding Platforms', desc: 'Active solver' }
   ];
 
   return (
@@ -42,7 +42,7 @@ const About = () => {
 
             {/* Glassmorphic Multi-Tab Terminal Mockup */}
             <div className="w-full rounded-2xl bg-[#090b14]/90 border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] backdrop-blur-md overflow-hidden relative group hover:border-white/10 transition-colors duration-300">
-              
+
               {/* Window Header / Tab bar */}
               <div className="bg-white/[0.03] px-4 pt-3 flex items-center justify-between border-b border-white/5">
                 <div className="flex items-center gap-1.5 mr-4 pb-3">
@@ -53,41 +53,38 @@ const About = () => {
 
                 {/* Explorer File Tabs */}
                 <div className="flex items-center gap-2 overflow-x-auto scrollbar-none flex-grow pb-3">
-                  
+
                   {/* profile.json button */}
-                  <button 
+                  <button
                     onClick={() => setActiveTab('profile.json')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${
-                      activeTab === 'profile.json'
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${activeTab === 'profile.json'
                         ? 'bg-[#101424] border-white/10 text-white shadow-sm'
                         : 'bg-transparent border-transparent text-white/40 hover:text-white/70'
-                    }`}
+                      }`}
                   >
                     <FiTerminal className="text-[#00f6ff]" size={11} />
                     <span>profile.json</span>
                   </button>
 
                   {/* philosophy.log button */}
-                  <button 
+                  <button
                     onClick={() => setActiveTab('philosophy.log')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${
-                      activeTab === 'philosophy.log'
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${activeTab === 'philosophy.log'
                         ? 'bg-[#101424] border-white/10 text-white shadow-sm'
                         : 'bg-transparent border-transparent text-white/40 hover:text-white/70'
-                    }`}
+                      }`}
                   >
                     <FiSettings className="text-[#915eff]" size={11} />
                     <span>philosophy.log</span>
                   </button>
 
                   {/* system.md button */}
-                  <button 
+                  <button
                     onClick={() => setActiveTab('system.md')}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${
-                      activeTab === 'system.md'
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border text-xs font-mono font-bold cursor-pointer transition-all duration-300 ${activeTab === 'system.md'
                         ? 'bg-[#101424] border-white/10 text-white shadow-sm'
                         : 'bg-transparent border-transparent text-white/40 hover:text-white/70'
-                    }`}
+                      }`}
                   >
                     <FiCpu className="text-[#ff00ea]" size={11} />
                     <span>system.md</span>
@@ -102,7 +99,7 @@ const About = () => {
 
               {/* Code window area with dynamic content rendering */}
               <div className="p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto min-h-[300px]">
-                
+
                 {activeTab === 'profile.json' && (
                   <div className="text-white">
                     <div className="text-white/40 mb-3">// High-performance React, Node, and Django architectures</div>
