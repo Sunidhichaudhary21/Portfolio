@@ -1,32 +1,75 @@
 import React, { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 
+// S-curve coordinates vector path nodes for monogram particle convergence
+const monogramKeyNodes = [
+  {x: 26, y: -46}, {x: 20, y: -54}, {x: 0, y: -58}, {x: -20, y: -54}, {x: -26, y: -46},
+  {x: -26, y: -30}, {x: -16, y: -18}, {x: 0, y: -6}, {x: 16, y: 6}, {x: 26, y: 18},
+  {x: 26, y: 32}, {x: 20, y: 54}, {x: 0, y: 58}, {x: -20, y: 54}, {x: -26, y: 46}
+];
+
+const getSPoint = (t) => {
+  const segments = monogramKeyNodes.length - 1;
+  const index = Math.floor(t * segments);
+  const localT = (t * segments) % 1;
+  
+  const p1 = monogramKeyNodes[Math.min(index, monogramKeyNodes.length - 1)];
+  const p2 = monogramKeyNodes[Math.min(index + 1, monogramKeyNodes.length - 1)];
+  
+  return {
+    x: p1.x + (p2.x - p1.x) * localT,
+    y: p1.y + (p2.y - p1.y) * localT
+  };
+};
+
 const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('INITIALIZING PROTOCOLS...');
+  const [statusText, setStatusText] = useState('INITIATING PROTOCOLS...');
+  const [simMetrics, setSimMetrics] = useState({
+    mem: '0x0000',
+    depth: 0,
+    packets: 0,
+    speed: '0 KB/S'
+  });
+
   const screenRef = useRef(null);
-  const logoRef = useRef(null);
+  const canvasRef = useRef(null);
   const progressContainerRef = useRef(null);
+  const telemetryLeftRef = useRef(null);
+  const telemetryRightRef = useRef(null);
   const accentsRef = useRef(null);
 
-  // High-end loading status sequences
   const statuses = [
     { threshold: 0, text: 'INITIATING SYSTEM SECURE HANDSHAKE...' },
-    { threshold: 18, text: 'PARSING CREATIVE UI ASSETS...' },
-    { threshold: 38, text: 'COMPILING GLOWING ORB GRADIENTS...' },
-    { threshold: 58, text: 'SYNAPSE CREATIVE PORTFOLIO ENGINE ONLINE...' },
-    { threshold: 78, text: 'ESTABLISHING INTERACTIVE HUD ELEMENTS...' },
-    { threshold: 92, text: 'SYSTEM OPERATIONAL // WELCOME' }
+    { threshold: 12, text: 'PARSING CREATIVE STACK FRAMEWORKS...' },
+    { threshold: 30, text: 'COMPILING RADAR POLAR GRAPH MESHES...' },
+    { threshold: 52, text: 'SYNAPSE QUANTUM CONSTELLATION ONLINE...' },
+    { threshold: 72, text: 'COALESCING GLOWING EMBL-MONOGRAM...' },
+    { threshold: 88, text: 'RESOLVING CORE REBOOT COMPLETED...' },
+    { threshold: 96, text: 'OPERATIONAL // INITIALIZING INTERFACE' }
   ];
 
+  // Simulating connection statistics
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSimMetrics({
+        mem: `0x${Math.floor(Math.random() * 65535).toString(16).toUpperCase()}`,
+        depth: Math.floor(Math.random() * 400) + 600,
+        packets: Math.floor(Math.random() * 120) + 40,
+        speed: `${(Math.random() * 500 + 700).toFixed(1)} KB/S`
+      });
+    }, 120);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Loading progress driver
   useEffect(() => {
     let currentProgress = 0;
-    const duration = 2200; // 2.2 seconds total loading duration
+    const duration = 2400; // 2.4 seconds loading duration
     const intervalTime = 30; // ms
     const increment = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
-      // Add subtle organic acceleration/deceleration
       const randomAcc = Math.random() * 2.8;
       currentProgress += increment + randomAcc;
       
@@ -38,7 +81,6 @@ const LoadingScreen = ({ onComplete }) => {
       const rounded = Math.floor(currentProgress);
       setProgress(rounded);
 
-      // Update status text based on current progress
       const matchingStatus = [...statuses]
         .reverse()
         .find(s => rounded >= s.threshold);
@@ -50,9 +92,12 @@ const LoadingScreen = ({ onComplete }) => {
     return () => clearInterval(timer);
   }, []);
 
-  // Exit choreography using GSAP when progress reaches 100%
+  // Exit Animation Sequence
+  const [isExiting, setIsExiting] = useState(false);
+
   useEffect(() => {
     if (progress === 100) {
+      setIsExiting(true);
       const ctx = gsap.context(() => {
         const tl = gsap.timeline({
           onComplete: () => {
@@ -60,28 +105,28 @@ const LoadingScreen = ({ onComplete }) => {
           }
         });
 
-        tl.to(logoRef.current, {
-          scale: 0.92,
+        tl.to([telemetryLeftRef.current, telemetryRightRef.current], {
           opacity: 0,
-          filter: 'blur(15px)',
-          duration: 0.5,
+          scale: 0.9,
+          filter: 'blur(10px)',
+          duration: 0.4,
           ease: 'power3.inOut'
         })
         .to(progressContainerRef.current, {
           opacity: 0,
           y: -15,
           filter: 'blur(5px)',
-          duration: 0.4,
+          duration: 0.45,
           ease: 'power3.inOut'
-        }, '-=0.4')
+        }, '-=0.35')
         .to(accentsRef.current, {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.35,
           ease: 'power2.inOut'
-        }, '-=0.4')
+        }, '-=0.45')
         .to(screenRef.current, {
-          yPercent: -100,
-          duration: 0.95,
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)', // split-wipe vertical slide
+          duration: 0.9,
           ease: 'power4.inOut'
         }, '-=0.25');
       }, screenRef);
@@ -90,109 +135,247 @@ const LoadingScreen = ({ onComplete }) => {
     }
   }, [progress, onComplete]);
 
-  // Entrance and infinite logo animations
+  // Canvas convergence physics simulation
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate SVG path draw
-      gsap.fromTo('.logo-svg-path', 
-        { strokeDashoffset: 300 },
-        { strokeDashoffset: 0, duration: 1.8, ease: 'power2.out' }
-      );
-      // Continuous pulse glow
-      gsap.fromTo('.logo-glow',
-        { opacity: 0.15, scale: 0.9 },
-        { opacity: 0.35, scale: 1.15, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut' }
-      );
-    }, screenRef);
-    return () => ctx.revert();
-  }, []);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
 
-  // Format progress with leading zeros
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Initialize 80 particles in random floating coordinate spaces
+    const totalParticles = 80;
+    const monogramCount = 45;
+    const particles = [];
+
+    for (let i = 0; i < totalParticles; i++) {
+      particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        baseX: Math.random() * window.innerWidth,
+        baseY: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2,
+        size: Math.random() * 2 + 1,
+        angle: Math.random() * Math.PI * 2,
+        orbitRadius: Math.random() * 30 + 10,
+        color: Math.random() > 0.55 ? '#915eff' : '#00f6ff'
+      });
+    }
+
+    let sweepAngle = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      
+      sweepAngle += 0.015;
+
+      // Draw subtle background coordinate ticks
+      const gridSize = 64;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.01)';
+      ctx.lineWidth = 0.5;
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        for (let y = 0; y < canvas.height; y += gridSize) {
+          if (x % (gridSize * 2) === 0 && y % (gridSize * 2) === 0) {
+            ctx.beginPath();
+            ctx.moveTo(x - 2, y); ctx.lineTo(x + 2, y);
+            ctx.moveTo(x, y - 2); ctx.lineTo(x, y + 2);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw outer target alignment guides
+      ctx.strokeStyle = 'rgba(255,255,255,0.015)';
+      ctx.lineWidth = 0.7;
+      [140, 200, 300].forEach(r => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      // Update and draw particles
+      particles.forEach((p, i) => {
+        if (isExiting) {
+          // Explode outwards away from center
+          const dx = p.x - cx;
+          const dy = p.y - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          p.x += (dx / dist) * 18;
+          p.y += (dy / dist) * 18;
+          p.size = Math.max(0, p.size - 0.05);
+        } else if (i < monogramCount) {
+          // Monogram builder particle convergence
+          const t = i / monogramCount;
+          const target = getSPoint(t);
+          
+          // Target coordinate on screen
+          const tx = cx + target.x;
+          const ty = cy + target.y;
+
+          // Interpolation factor proportional to progress (lerps from floating base position to target logo position)
+          const factor = Math.min(1, progress / 100);
+          
+          // Apply drifting float noise before convergence complete
+          const floatX = p.baseX + Math.cos(p.angle) * p.orbitRadius;
+          const floatY = p.baseY + Math.sin(p.angle) * p.orbitRadius;
+          p.angle += 0.02;
+
+          // Lerp position
+          const finalTargetX = floatX + (tx - floatX) * factor;
+          const finalTargetY = floatY + (ty - floatY) * factor;
+
+          p.x += (finalTargetX - p.x) * 0.1;
+          p.y += (finalTargetY - p.y) * 0.1;
+        } else {
+          // Ambient cosmic background dust floating organically
+          p.baseX += p.vx;
+          p.baseY += p.vy;
+
+          // Boundary checks
+          if (p.baseX < 0 || p.baseX > canvas.width) p.vx *= -1;
+          if (p.baseY < 0 || p.baseY > canvas.height) p.vy *= -1;
+
+          p.x = p.baseX;
+          p.y = p.baseY;
+        }
+
+        // Draw particle
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = progress > 50 ? 5 : 0;
+        ctx.shadowColor = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // Draw vector connector links outlining the S monogram as it resolves
+      if (!isExiting && progress > 35) {
+        ctx.beginPath();
+        const drawFactor = (progress - 35) / 65; // goes from 0 to 1
+        
+        ctx.strokeStyle = `rgba(145, 94, 255, ${drawFactor * 0.4})`;
+        ctx.lineWidth = 1.2;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#00f6ff';
+
+        for (let i = 0; i < monogramCount - 1; i++) {
+          ctx.lineTo(particles[i].x, particles[i].y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+
+      // Draw radar sweeper arm
+      if (!isExiting) {
+        const sweepRadius = Math.min(canvas.width, canvas.height) * 0.32;
+        const sx = cx + Math.cos(sweepAngle) * sweepRadius;
+        const sy = cy + Math.sin(sweepAngle) * sweepRadius;
+
+        const sweepGrad = ctx.createLinearGradient(cx, cy, sx, sy);
+        sweepGrad.addColorStop(0, 'rgba(145, 94, 255, 0.1)');
+        sweepGrad.addColorStop(1, 'rgba(0, 246, 255, 0)');
+        
+        ctx.strokeStyle = sweepGrad;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(sx, sy);
+        ctx.stroke();
+      }
+
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [progress, isExiting]);
+
   const formatProgress = (num) => {
     return num < 10 ? `00${num}` : num < 100 ? `0${num}` : num;
   };
 
   return (
-    <div ref={screenRef} className="loading-screen-wrapper">
-      {/* Dark luxury atmospheric background */}
-      <div className="absolute inset-0 bg-[#030014] z-0 overflow-hidden">
-        {/* Fine grid lines */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1.2px,transparent_1.2px)] [background-size:24px_24px] pointer-events-none opacity-80" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.003)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.003)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-60" />
+    <div 
+      ref={screenRef} 
+      className="fixed inset-0 z-[9999] bg-[#030014] select-none overflow-hidden flex flex-col items-center justify-center"
+      style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' }}
+    >
+      {/* Interactive Vector Space Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />
 
-        {/* Soft floating glow meshes */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gradient-to-tr from-[#915eff]/10 via-[#d45eff]/5 to-[#00f6ff]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse duration-[8s]" />
+      {/* Ambient background glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] bg-gradient-to-tr from-[#915eff]/10 via-[#d45eff]/5 to-[#00f6ff]/10 rounded-full blur-[130px] pointer-events-none mix-blend-screen opacity-70" />
+
+      {/* Cyber Brackets HUD overlays */}
+      <div ref={accentsRef} className="absolute inset-0 pointer-events-none z-10 p-6 md:p-10">
+        <div className="absolute top-8 left-8 w-6 h-6 border-t border-l border-white/10" />
+        <div className="absolute top-8 right-8 w-6 h-6 border-t border-r border-white/10" />
+        <div className="absolute bottom-8 left-8 w-6 h-6 border-b border-l border-white/10" />
+        <div className="absolute bottom-8 right-8 w-6 h-6 border-b border-r border-white/10" />
+        
+        {/* Alignment Grid Marks */}
+        <div className="absolute left-10 right-10 top-8 h-[1px] bg-white/[0.02]" />
+        <div className="absolute left-10 right-10 bottom-8 h-[1px] bg-white/[0.02]" />
+        <div className="absolute left-8 top-10 bottom-10 w-[1px] bg-white/[0.02]" />
+        <div className="absolute right-8 top-10 bottom-10 w-[1px] bg-white/[0.02]" />
+
+        <div className="absolute top-11 left-12 text-[7px] font-mono text-white/30 tracking-[0.25em] uppercase">
+          SECURE_CONN_ESTABLISHED // NEURAL_HANDSHAKE
+        </div>
+        <div className="absolute bottom-11 right-12 text-[7px] font-mono text-white/30 tracking-[0.25em] uppercase text-right">
+          SYS.LOADER // CONSTELLATION_V_3.9
+        </div>
       </div>
 
-      {/* Cyber/HUD design elements */}
-      <div ref={accentsRef} className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-8 left-8 w-6 h-6 border-t-2 border-l-2 border-white/10 rounded-tl-sm" />
-        <div className="absolute top-8 right-8 w-6 h-6 border-t-2 border-r-2 border-white/10 rounded-tr-sm" />
-        <div className="absolute bottom-8 left-8 w-6 h-6 border-b-2 border-l-2 border-white/10 rounded-bl-sm" />
-        <div className="absolute bottom-8 right-8 w-6 h-6 border-b-2 border-r-2 border-white/10 rounded-br-sm" />
+      {/* Core Center Elements */}
+      <div className="relative z-10 w-full max-w-5xl px-6 flex flex-col items-center justify-center">
         
-        <div className="absolute top-12 left-12 text-[8px] font-mono text-white/20 tracking-widest uppercase">
-          SECURE_CONN_ESTABLISHED
-        </div>
-        <div className="absolute bottom-12 right-12 text-[8px] font-mono text-white/20 tracking-widest uppercase">
-          SYS.LOADER // REV_2026
-        </div>
-      </div>
-
-      {/* Centerpiece Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
-        
-        {/* Animated Custom Logo Emblem */}
-        <div ref={logoRef} className="relative w-36 h-36 md:w-40 md:h-40 mb-12 flex items-center justify-center">
-          {/* Logo glow */}
-          <div className="logo-glow absolute inset-[-15px] rounded-full bg-gradient-to-tr from-[#915eff] to-[#00f6ff] opacity-20 blur-2xl pointer-events-none" />
+        <div className="w-full flex items-center justify-between gap-4 max-w-2xl md:max-w-3xl mb-20">
           
-          <svg className="w-full h-full drop-shadow-[0_0_20px_rgba(145,94,255,0.35)]" viewBox="0 0 100 100" fill="none">
-            {/* Geometric loading circle track */}
-            <circle cx="50" cy="50" r="42" stroke="rgba(255, 255, 255, 0.03)" strokeWidth="1.5" />
-            <circle 
-              cx="50" 
-              cy="50" 
-              r="42" 
-              stroke="url(#emblemGrad)" 
-              strokeWidth="1.5" 
-              strokeDasharray="264" 
-              strokeDashoffset="140" 
-              className="opacity-50 animate-[spin-slow_15s_linear_infinite]" 
-            />
-            
-            {/* Tech grid crosshairs */}
-            <path d="M 50,4 L 50,10" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-            <path d="M 50,90 L 50,96" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-            <path d="M 4,50 L 10,50" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-            <path d="M 90,50 L 96,50" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-            
-            {/* Stylized custom monogram "S" representing Sunidhi */}
-            <path 
-              className="logo-svg-path"
-              d="M 58,36 C 58,26 42,26 42,36 C 42,46 58,48 58,58 C 58,68 42,68 42,58" 
-              stroke="url(#emblemGrad)" 
-              strokeWidth="5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-              strokeDasharray="300"
-              strokeDashoffset="0"
-            />
-            
-            <defs>
-              <linearGradient id="emblemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#915eff" />
-                <stop offset="50%" stopColor="#d45eff" />
-                <stop offset="100%" stopColor="#00f6ff" />
-              </linearGradient>
-            </defs>
-          </svg>
+          {/* Left Diagnostic Column */}
+          <div ref={telemetryLeftRef} className="hidden md:flex flex-col gap-2.5 font-mono text-[8px] text-white/20 tracking-wider text-left max-w-[140px]">
+            <div>SYS_ADDR: 0x{simMetrics.mem}</div>
+            <div>STK_DEEP: {simMetrics.depth} UNIT</div>
+            <div>PCK_RATE: {simMetrics.packets} RX/S</div>
+            <div className="w-12 h-[1px] bg-white/10 mt-1" />
+            <div className="text-[#00f6ff]/40">VCORE: 1.21V</div>
+          </div>
+
+          {/* Spacer representing central particle monogram node width */}
+          <div className="w-40 h-40 flex items-center justify-center mx-auto relative">
+            <div className="absolute w-20 h-20 rounded-full border border-dashed border-[#915eff]/10 animate-spin-slow" />
+            <div className="absolute w-28 h-28 rounded-full border border-white/[0.02]" />
+          </div>
+
+          {/* Right Diagnostic Column */}
+          <div ref={telemetryRightRef} className="hidden md:flex flex-col gap-2.5 font-mono text-[8px] text-white/20 tracking-wider text-right max-w-[140px]">
+            <div>NET_SPEED: {simMetrics.speed}</div>
+            <div>LOCAL_IP: 127.0.0.1</div>
+            <div>LOGS: COMPILED</div>
+            <div className="w-12 h-[1px] bg-white/10 ml-auto mt-1" />
+            <div className="text-[#915eff]/40">CPU_TEMP: 39.4 C</div>
+          </div>
+
         </div>
 
-        {/* Loading Progress Interface */}
-        <div ref={progressContainerRef} className="w-64 md:w-72 flex flex-col items-center gap-5">
+        {/* Loading Progress Slider bar */}
+        <div ref={progressContainerRef} className="w-64 md:w-80 flex flex-col items-center gap-4">
           
-          {/* Progress Percentage Display */}
+          {/* Numeric loader display */}
           <div className="flex items-baseline justify-center font-mono">
             <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 tracking-tighter">
               {formatProgress(progress)}
@@ -200,21 +383,21 @@ const LoadingScreen = ({ onComplete }) => {
             <span className="text-xs font-bold text-[#00f6ff] ml-1 opacity-80">%</span>
           </div>
 
-          {/* Micro Progress Bar */}
+          {/* Progress bar line */}
           <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden relative shadow-[0_0_10px_rgba(255,255,255,0.01)]">
             <div 
-              className="h-full bg-gradient-to-r from-[#915eff] via-[#d45eff] to-[#00f6ff] transition-all duration-70ms ease-out shadow-[0_0_10px_rgba(0,246,255,0.5)]"
+              className="h-full bg-gradient-to-r from-[#915eff] via-[#d45eff] to-[#00f6ff] transition-all duration-70ms ease-out shadow-[0_0_12px_rgba(0,246,255,0.6)]"
               style={{ width: `${progress}%` }}
             />
           </div>
 
-          {/* Running Terminal Status */}
-          <div className="w-full flex items-center justify-between text-[8px] font-mono tracking-[0.15em] text-white/40 uppercase">
-            <span className="text-left text-[#00f6ff]/80 truncate max-w-[80%] transition-all duration-300">
+          {/* Bottom checklist label */}
+          <div className="w-full flex items-center justify-between text-[7px] font-mono tracking-[0.2em] text-white/40 uppercase">
+            <span className="text-left text-[#00f6ff]/95 truncate max-w-[80%] transition-all duration-300">
               {statusText}
             </span>
-            <span className="text-right whitespace-nowrap animate-pulse font-bold text-white/50">
-              ACTIVE
+            <span className="text-right whitespace-nowrap animate-pulse font-bold text-emerald-400">
+              SYS_OK
             </span>
           </div>
         </div>
