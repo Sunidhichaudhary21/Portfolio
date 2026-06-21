@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FiAward, FiExternalLink, FiCalendar, FiShield } from 'react-icons/fi';
+import { FiAward, FiExternalLink, FiCalendar } from 'react-icons/fi';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -69,98 +69,76 @@ const Certifications = () => {
                     trigger: card,
                     start: "top 88%",
                 },
-                y: 50,
+                y: 30,
                 opacity: 0,
                 duration: 0.8,
-                delay: i * 0.1,
+                delay: i * 0.08,
                 ease: "power3.out"
             });
         });
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-24 bg-[#050816] relative overflow-hidden" id="certifications">
-            {/* Background glowing ambient elements */}
-            <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-40 select-none z-0">
-                <div className="absolute top-[20%] left-[-100px] w-96 h-96 bg-[#915eff]/10 rounded-full blur-[130px]" />
-                <div className="absolute bottom-[20%] right-[-100px] w-80 h-80 bg-[#00f6ff]/10 rounded-full blur-[130px]" />
-            </div>
-
-            {/* Subtle tech dot matrix */}
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff005_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none z-0 opacity-40" />
-
-            <div className="w-full max-w-screen-2xl mx-auto px-6 md:px-12 xl:px-24 relative z-10">
+        <section ref={containerRef} className="py-24 bg-[#FFFDF9] relative overflow-hidden" id="certifications">
+            <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 xl:px-16 relative z-10">
                 
                 {/* Title block */}
-                <div className="text-center mb-16 sm:mb-20">
-                  <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#915eff]/30 bg-[#915eff]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-[#915eff] shadow-[0_0_10px_rgba(145,94,255,0.15)]">
-                    <FiShield size={12} className="animate-pulse" /> Validations
+                <div className="text-left mb-16 max-w-2xl">
+                  <span className="font-display font-extrabold text-[11px] tracking-[0.2em] text-[#B39274] uppercase mb-4 inline-block">
+                    Validations & Achievements
                   </span>
-                  <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.1] tracking-tight mb-4">
-                    Certifications & Awards
+                  <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-800 leading-tight">
+                    Certifications
                   </h2>
-                  <p className="max-w-xl mx-auto text-[#aaa6c3] text-sm sm:text-base leading-relaxed">
-                    Recognized industry accomplishments reflecting my ongoing dedication to technical knowledge, continuous skill growth, and programming excellence.
+                  <p className="text-neutral-500 text-sm mt-3 leading-relaxed">
+                    Industry credentials reflecting my ongoing dedication to technical knowledge, continuous skill growth, and programming excellence.
                   </p>
-                  <div className="w-24 h-1 bg-gradient-to-r from-[#915eff] to-[#00f6ff] rounded-full opacity-80 mt-6 mx-auto shadow-[0_0_12px_#00f6ff]" />
                 </div>
 
                 {/* Certifications Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {certificates.map((cert) => (
                         <div
                             key={cert.id}
-                            className="cert-card group relative bg-[#0e0c24]/50 backdrop-blur-md rounded-3xl overflow-hidden border border-white/5 shadow-[0_15px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_rgba(145,94,255,0.12)] hover:-translate-y-2 hover:border-[#915eff]/40 transition-all duration-300"
+                            className="cert-card group bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-sm hover:shadow-md hover:border-[#B39274] transition-all duration-300 flex flex-col"
                         >
-                            {/* Holographic Image Viewport Mockup */}
-                            <div className="h-52 overflow-hidden relative border-b border-white/5 flex items-center justify-center bg-black/40">
-                                {/* Sci-fi Scanning HUD */}
-                                <div className="absolute inset-0 bg-[#050816]/75 group-hover:bg-[#050816]/20 transition-colors duration-500 z-10" />
-                                
-                                {/* Moving Scanner Line */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#00f6ff]/10 to-transparent w-full h-[10%] animate-hologram-sweep pointer-events-none z-20 opacity-0 group-hover:opacity-100 border-b border-[#00f6ff]/30 transition-opacity duration-300" />
-                                
+                            {/* Image Viewport */}
+                            <div className="h-44 overflow-hidden relative border-b border-neutral-100 flex items-center justify-center bg-neutral-50/50 p-4">
                                 <img
                                     src={cert.image}
                                     alt={cert.title}
-                                    className="w-[90%] h-[85%] object-contain rounded-lg relative z-0 transform group-hover:scale-105 transition-transform duration-500"
+                                    className="w-full h-full object-contain rounded-md transform group-hover:scale-102 transition-transform duration-500"
                                 />
                                 
-                                {/* Floating Top Badges */}
-                                <div className="absolute top-4 left-4 z-20 font-mono text-[9px] text-[#00f6ff] bg-black/60 px-2 py-0.5 rounded border border-[#00f6ff]/20 tracking-wider">
-                                    SYS.VAL: ACTIVE
-                                </div>
-                                <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10 flex items-center gap-1.5">
-                                    <FiCalendar size={11} className="text-white/60" /> {cert.date}
+                                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-bold text-neutral-500 border border-neutral-200 flex items-center gap-1">
+                                    <FiCalendar size={10} className="text-neutral-400" /> {cert.date}
                                 </div>
                             </div>
 
-                            {/* Card Content details */}
-                            <div className="p-6 flex flex-col min-h-[260px]">
-                                {/* Issuer block */}
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-2 bg-white/5 border border-white/10 rounded-lg text-[#00f6ff] group-hover:bg-[#00f6ff]/10 group-hover:border-[#00f6ff]/30 transition-all duration-300">
-                                        <FiAward size={18} />
+                            {/* Card Content */}
+                            <div className="p-5 flex flex-col flex-grow">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="p-1.5 bg-neutral-50 rounded-lg text-[#B39274] border border-neutral-200">
+                                        <FiAward size={14} />
                                     </div>
-                                    <span className="text-xs font-bold text-[#00f6ff] tracking-widest uppercase font-mono">{cert.issuer}</span>
+                                    <span className="text-[10px] font-bold text-neutral-400 tracking-wider uppercase">{cert.issuer}</span>
                                 </div>
 
-                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors duration-300">
+                                <h3 className="text-base font-bold text-neutral-850 mb-2 leading-snug">
                                     {cert.title}
                                 </h3>
 
-                                <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">
+                                <p className="text-neutral-500 text-xs leading-relaxed mb-6 line-clamp-3">
                                     {cert.description}
                                 </p>
 
-                                {/* Action launch */}
                                 <a
                                     href={cert.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-auto inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white hover:text-[#00f6ff] transition-colors group/link"
+                                    className="mt-auto inline-flex items-center gap-1.5 text-xs font-bold text-[#B39274] hover:text-neutral-900 transition-colors group/link"
                                 >
-                                    View Verification Registry
+                                    Verify Certificate
                                     <FiExternalLink size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                                 </a>
                             </div>

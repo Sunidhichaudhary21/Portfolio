@@ -1,25 +1,19 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import About from '../components/About'
-import Experience from '../components/Experience'
+import ProfileDetails from '../components/ProfileDetails'
 import Projects from '../components/Projects'
-import Skills from '../components/Skills'
-import CodingProfiles from '../components/CodingProfiles'
 import Certifications from '../components/Certifications'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
 const Home = () => {
     return (
-        <div className="home">
+        <div className="home bg-[#FFFDF9] min-h-screen">
             <Navbar />
             <Hero />
-            <About />
-            <Experience />
+            <ProfileDetails />
             <Projects />
-            <Skills />
-            <CodingProfiles />
             <Certifications />
             <Contact />
             <Footer />
