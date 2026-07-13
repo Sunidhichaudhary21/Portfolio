@@ -79,18 +79,18 @@ const Certifications = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-24 bg-[#FFFDF9] relative overflow-hidden" id="certifications">
+        <section ref={containerRef} className="py-24 bg-[#FDF8F3] relative overflow-hidden" id="certifications">
             <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 xl:px-16 relative z-10">
                 
                 {/* Title block */}
-                <div className="text-left mb-16 max-w-2xl">
-                  <span className="font-display font-extrabold text-[11px] tracking-[0.2em] text-[#B39274] uppercase mb-4 inline-block">
+                <div className="text-left mb-16 max-w-2xl" data-aos="fade-right">
+                  <span className="font-sans font-black text-xs tracking-[0.2em] text-[#EE9372] uppercase mb-3 inline-block">
                     Validations & Achievements
                   </span>
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-800 leading-tight">
+                  <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#0B3331] leading-tight">
                     Certifications
                   </h2>
-                  <p className="text-neutral-500 text-sm mt-3 leading-relaxed">
+                  <p className="text-[#0B3331]/75 text-sm mt-3 leading-relaxed">
                     Industry credentials reflecting my ongoing dedication to technical knowledge, continuous skill growth, and programming excellence.
                   </p>
                 </div>
@@ -100,35 +100,35 @@ const Certifications = () => {
                     {certificates.map((cert) => (
                         <div
                             key={cert.id}
-                            className="cert-card group bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-sm hover:shadow-md hover:border-[#B39274] transition-all duration-300 flex flex-col"
+                            className="cert-card group bg-white rounded-3xl overflow-hidden border border-[#0B3331]/10 shadow-md hover:shadow-xl hover:border-[#EE9372] transition-all duration-300 flex flex-col h-full"
                         >
                             {/* Image Viewport */}
-                            <div className="h-44 overflow-hidden relative border-b border-neutral-100 flex items-center justify-center bg-neutral-50/50 p-4">
+                            <div className="h-44 overflow-hidden relative border-b border-[#0B3331]/5 flex items-center justify-center bg-[#FDF8F3]/40 p-4">
                                 <img
                                     src={cert.image}
                                     alt={cert.title}
-                                    className="w-full h-full object-contain rounded-md transform group-hover:scale-102 transition-transform duration-500"
+                                    className="w-full h-full object-contain rounded-xl transform group-hover:scale-102 transition-transform duration-500"
                                 />
                                 
-                                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[10px] font-bold text-neutral-500 border border-neutral-200 flex items-center gap-1">
-                                    <FiCalendar size={10} className="text-neutral-400" /> {cert.date}
+                                <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full text-[9px] font-sans font-bold text-[#0B3331]/70 border border-[#0B3331]/10 flex items-center gap-1">
+                                    <FiCalendar size={10} className="text-[#0B3331]/40" /> {cert.date}
                                 </div>
                             </div>
 
                             {/* Card Content */}
-                            <div className="p-5 flex flex-col flex-grow">
+                            <div className="p-6 flex flex-col flex-grow text-left">
                                 <div className="flex items-center gap-2 mb-3">
-                                    <div className="p-1.5 bg-neutral-50 rounded-lg text-[#B39274] border border-neutral-200">
+                                    <div className="p-1.5 bg-[#0B3331]/5 rounded-lg text-[#EE9372] border border-[#0B3331]/10">
                                         <FiAward size={14} />
                                     </div>
-                                    <span className="text-[10px] font-bold text-neutral-400 tracking-wider uppercase">{cert.issuer}</span>
+                                    <span className="text-[10px] font-sans font-black text-[#0B3331]/50 tracking-wider uppercase">{cert.issuer}</span>
                                 </div>
 
-                                <h3 className="text-base font-bold text-neutral-850 mb-2 leading-snug">
+                                <h3 className="text-base font-serif font-black text-[#0B3331] mb-2 leading-snug">
                                     {cert.title}
                                 </h3>
 
-                                <p className="text-neutral-500 text-xs leading-relaxed mb-6 line-clamp-3">
+                                <p className="text-[#0B3331]/70 font-sans text-xs leading-relaxed mb-6 line-clamp-3">
                                     {cert.description}
                                 </p>
 
@@ -136,7 +136,7 @@ const Certifications = () => {
                                     href={cert.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-auto inline-flex items-center gap-1.5 text-xs font-bold text-[#B39274] hover:text-neutral-900 transition-colors group/link"
+                                    className="mt-auto inline-flex items-center gap-1.5 text-xs font-sans font-bold text-[#EE9372] hover:text-[#0B3331] transition-colors group/link"
                                 >
                                     Verify Certificate
                                     <FiExternalLink size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />

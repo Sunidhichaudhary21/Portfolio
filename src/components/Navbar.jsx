@@ -24,7 +24,7 @@ const Navbar = () => {
       setScrolled(window.scrollY > 50);
 
       if (location.pathname === '/') {
-        const sectionIds = ['home', 'about', 'projects', 'certifications', 'contact'];
+        const sectionIds = ['home', 'about', 'projects', 'experience', 'certifications', 'contact'];
         const scrollPos = window.scrollY + 100;
 
         let current = 'home';
@@ -75,22 +75,34 @@ const Navbar = () => {
     { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
     { name: 'Projects', id: 'projects' },
+    { name: 'Experience', id: 'experience' },
     { name: 'Certifications', id: 'certifications' },
     { name: 'Contact', id: 'contact' }
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${scrolled ? 'bg-[#FFFDF9]/95 shadow-sm backdrop-blur-md border-b border-neutral-200/50' : 'bg-transparent'}`} style={{ paddingTop: 'max(env(safe-area-inset-top, 0), 0.75rem)', paddingLeft: 'max(env(safe-area-inset-left, 0), 0)', paddingRight: 'max(env(safe-area-inset-right, 0), 0)' }}>
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full ${
+        scrolled 
+          ? 'bg-[#FDF8F3]/95 border-b border-[#0B3331]/10 shadow-sm backdrop-blur-md' 
+          : 'bg-transparent'
+      }`} 
+      style={{ 
+        paddingTop: 'max(env(safe-area-inset-top, 0), 0.75rem)', 
+        paddingLeft: 'max(env(safe-area-inset-left, 0), 0)', 
+        paddingRight: 'max(env(safe-area-inset-right, 0), 0)' 
+      }}
+    >
       <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12 xl:px-16 flex justify-between items-center py-3">
         {/* Logo */}
-        <div className="cursor-pointer z-50 flex items-center gap-2 group" onClick={() => handleNavigation('home')}>
+        <div className="cursor-pointer z-50 flex items-center gap-2.5 group" onClick={() => handleNavigation('home')}>
           {/* Monogram Icon */}
-          <div className="relative w-8 h-8 flex items-center justify-center bg-neutral-900 text-white font-display font-extrabold text-xs tracking-tighter rounded transition-all duration-300 group-hover:bg-[#B39274]">
+          <div className="relative w-9 h-9 flex items-center justify-center bg-[#0B3331] text-[#FDF8F3] font-sans font-black text-xs tracking-tighter rounded-xl transition-all duration-300 group-hover:bg-[#EE9372] group-hover:scale-105 shadow-sm">
             <span>SC</span>
           </div>
 
           {/* Text Logo */}
-          <span className="text-base font-display font-extrabold text-neutral-800 tracking-tight transition-colors duration-300">
+          <span className="text-xl font-serif font-black text-[#0B3331] tracking-tight transition-colors duration-300">
             Sunidhi.
           </span>
         </div>
@@ -101,11 +113,16 @@ const Navbar = () => {
             <button
               key={item.id}
               onClick={() => handleNavigation(item.id)}
-              className={`text-xs font-display font-extrabold uppercase tracking-widest transition-all duration-300 relative group flex items-center ${activeSection === item.id ? 'text-[#B39274]' : 'text-neutral-500 hover:text-neutral-900'
-                }`}
+              className={`text-xs font-sans font-bold uppercase tracking-widest transition-all duration-300 relative group flex items-center py-1.5 ${
+                activeSection === item.id 
+                  ? 'text-[#EE9372]' 
+                  : 'text-[#0B3331]/75 hover:text-[#0B3331]'
+              }`}
             >
               {item.name}
-              <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#B39274] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${activeSection === item.id ? 'opacity-100' : ''}`}></span>
+              <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#EE9372] opacity-0 transition-all duration-300 group-hover:opacity-100 ${
+                activeSection === item.id ? 'opacity-100 scale-100' : 'scale-50'
+              }`}></span>
             </button>
           ))}
         </div>
@@ -113,7 +130,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden z-50 text-neutral-800 hover:text-[#B39274] transition-colors p-2 flex items-center justify-center active:scale-95 relative"
+          className="md:hidden z-50 text-[#0B3331] hover:text-[#EE9372] transition-colors p-2 flex items-center justify-center active:scale-95 relative"
           aria-label="Toggle navigation menu"
         >
           {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -122,7 +139,7 @@ const Navbar = () => {
         {/* Blur Backdrop */}
         {isOpen && (
           <div 
-            className="fixed inset-0 bg-neutral-900/10 backdrop-blur-md z-[998] md:hidden"
+            className="fixed inset-0 bg-[#0B3331]/20 backdrop-blur-md z-[998] md:hidden"
             onClick={() => setIsOpen(false)}
           />
         )}
@@ -130,20 +147,24 @@ const Navbar = () => {
         {/* Mobile Menu Overlay */}
         {isOpen && (
           <div 
-            className="fixed inset-y-0 right-0 w-[240px] bg-[#FFFDF9] border-l border-neutral-250 z-[999] flex flex-col items-center justify-start py-20 md:hidden shadow-xl"
+            className="fixed inset-y-0 right-0 w-[260px] bg-[#FDF8F3] border-l border-[#0B3331]/10 z-[999] flex flex-col items-center justify-start py-20 md:hidden shadow-2xl"
             onClick={(e) => {
               if (e.target === e.currentTarget) setIsOpen(false);
             }}
           >
-            <div className="flex flex-col items-stretch w-full">
-              {navItems.map((item, index) => (
+            <div className="flex flex-col items-stretch w-full mt-6">
+              {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => {
                     handleNavigation(item.id);
                     setIsOpen(false);
                   }}
-                  className="w-full py-4 px-8 text-left text-sm font-display font-extrabold uppercase tracking-widest text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-colors border-b border-neutral-100"
+                  className={`w-full py-4 px-8 text-left text-sm font-sans font-bold uppercase tracking-widest transition-colors border-b border-[#0B3331]/5 ${
+                    activeSection === item.id 
+                      ? 'text-[#EE9372] bg-[#0B3331]/5' 
+                      : 'text-[#0B3331]/75 hover:text-[#0B3331] hover:bg-[#0B3331]/5'
+                  }`}
                 >
                   {item.name}
                 </button>
@@ -153,7 +174,7 @@ const Navbar = () => {
             <div className="absolute top-4 right-4 z-50">
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-neutral-800 hover:text-[#B39274] p-2 transition-colors"
+                className="text-[#0B3331] hover:text-[#EE9372] p-2 transition-colors"
               >
                 <FiX size={24} />
               </button>

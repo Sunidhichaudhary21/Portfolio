@@ -22,7 +22,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: true,
-            color: 'from-pink-500 to-rose-500'
+            color: 'from-pink-500/20 to-rose-500/20'
         },
         {
             id: 2,
@@ -34,7 +34,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: true,
-            color: 'from-emerald-400 to-teal-500'
+            color: 'from-emerald-400/20 to-teal-500/20'
         },
         {
             id: 3,
@@ -46,7 +46,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: false,
-            color: 'from-blue-500 to-indigo-600'
+            color: 'from-blue-500/20 to-indigo-650/20'
         },
         {
             id: 4,
@@ -58,7 +58,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: false,
-            color: 'from-sky-400 to-blue-500'
+            color: 'from-sky-400/20 to-blue-500/20'
         },
         {
             id: 5,
@@ -70,7 +70,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: true,
-            color: 'from-purple-500 to-violet-600'
+            color: 'from-purple-500/20 to-violet-600/20'
         },
         {
             id: 6,
@@ -82,7 +82,7 @@ const AllProjects = () => {
             github: '#',
             live: '#',
             featured: false,
-            color: 'from-yellow-400 to-orange-500'
+            color: 'from-yellow-400/20 to-orange-500/20'
         }
     ];
 
@@ -98,53 +98,54 @@ const AllProjects = () => {
         : projects.filter(p => p.category === filter);
 
     return (
-        <div className="bg-[#fffcf5] min-h-screen relative overflow-x-hidden">
+        <div className="bg-[#FDF8F3] min-h-screen relative overflow-x-hidden text-left">
             {/* Background Decoration */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#335c67]/5 rounded-full blur-[100px]"></div>
-                <div className="absolute bottom-[10%] left-[-10%] w-[600px] h-[600px] bg-[#e09f3e]/5 rounded-full blur-[100px]"></div>
+                <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#EE9372]/5 rounded-full blur-[100px]"></div>
+                <div className="absolute bottom-[10%] left-[-10%] w-[600px] h-[600px] bg-[#0B3331]/5 rounded-full blur-[100px]"></div>
             </div>
 
-            {/* Navbar Placeholder / Back Button */}
+            {/* Navbar Back Button */}
             <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none">
                 <div className="max-w-screen-2xl mx-auto">
-                    <Link to="/" className="inline-flex pointer-events-auto items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md text-[#335c67] font-bold rounded-full shadow-sm hover:shadow-md hover:bg-white transition-all duration-300 border border-[#335c67]/10 group">
+                    <Link to="/" className="inline-flex pointer-events-auto items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md text-[#0B3331] font-sans font-bold rounded-full shadow-md hover:shadow-lg hover:bg-white transition-all duration-300 border border-[#0B3331]/10 group">
                         <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-                        <span className="hidden sm:inline">Back to Home</span>
+                        <span>Back to Home</span>
                     </Link>
                 </div>
             </div>
 
             <section className="pt-32 pb-20 relative z-10">
-                <div className="w-full max-w-screen-2xl mx-auto px-6 md:px-12">
+                <div className="w-full max-w-screen-xl mx-auto px-6 md:px-12">
                     {/* Header Section */}
                     <div className="text-center mb-16 space-y-4">
-                        <span className="inline-block py-1 px-3 rounded-full bg-[#e09f3e]/10 text-[#e09f3e] text-xs font-bold tracking-widest uppercase border border-[#e09f3e]/20">
-                            Portfolio
+                        <span className="inline-block py-1 px-4 rounded-full bg-[#EE9372]/10 text-[#EE9372] text-xs font-sans font-black tracking-widest uppercase border border-[#EE9372]/20">
+                            Archive Catalogue
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-black text-[#335c67] tracking-tight">
-                            Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#335c67] to-[#e09f3e]">Works</span>
+                        <h1 className="text-4xl sm:text-6xl font-serif font-black text-[#0B3331] tracking-tight">
+                            Explore <span className="underline decoration-[#EE9372] decoration-wavy underline-offset-4">Works</span>
                         </h1>
-                        <p className="max-w-2xl mx-auto text-[#335c67]/70 text-lg md:text-xl font-light leading-relaxed">
-                            A curated collection of web applications, APIs, and experiments showcasing my technical expertise and creative problem-solving.
+                        <p className="max-w-xl mx-auto text-[#0B3331]/70 text-base sm:text-lg font-sans leading-relaxed">
+                            A curated collection of web applications, API integrations, and technical challenges showcasing programming concepts.
                         </p>
                     </div>
 
                     {/* Filter Tabs */}
                     <div className="flex justify-center mb-16">
-                        <div className="inline-flex flex-wrap justify-center gap-2 p-1.5 bg-white rounded-full shadow-lg shadow-[#335c67]/5 border border-[#335c67]/5">
+                        <div className="inline-flex flex-wrap justify-center gap-2 p-1.5 bg-white rounded-full shadow-md border border-[#0B3331]/10">
                             {categories.map(cat => (
                                 <button
                                     key={cat.id}
                                     onClick={() => setFilter(cat.id)}
-                                    className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative overflow-hidden group ${filter === cat.id
-                                            ? 'text-white bg-[#335c67] shadow-md'
-                                            : 'text-[#335c67]/70 hover:text-[#335c67] hover:bg-[#335c67]/5'
-                                        }`}
+                                    className={`px-5 py-2 rounded-full text-xs font-sans font-bold transition-all duration-300 relative overflow-hidden group cursor-pointer ${
+                                        filter === cat.id
+                                            ? 'text-[#FDF8F3] bg-[#0B3331] shadow-sm'
+                                            : 'text-[#0B3331]/70 hover:text-[#0B3331] hover:bg-[#0B3331]/5'
+                                    }`}
                                 >
                                     <span className="relative z-10 flex items-center gap-2">
-                                        {cat.id === 'all' && <FiFilter size={14} />}
-                                        {cat.id === 'fullstack' && <FiCode size={14} />}
+                                        {cat.id === 'all' && <FiFilter size={12} />}
+                                        {cat.id === 'fullstack' && <FiCode size={12} />}
                                         {cat.label}
                                     </span>
                                 </button>
@@ -154,74 +155,69 @@ const AllProjects = () => {
 
                     {/* Projects Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                        {filtered.map((project, index) => (
+                        {filtered.map((project) => (
                             <div
                                 key={project.id}
-                                className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#335c67]/10 shadow-sm hover:shadow-2xl hover:shadow-[#335c67]/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full"
+                                className="group relative bg-white rounded-3xl overflow-hidden border border-[#0B3331]/10 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5 flex flex-col h-full"
                             >
                                 {/* Featured Badge */}
                                 {project.featured && (
                                     <div className="absolute top-4 right-4 z-20">
-                                        <div className="bg-[#e09f3e] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-orange-500/20">
+                                        <div className="bg-[#EE9372] text-[#0B3331] text-[9px] font-sans font-black uppercase tracking-widest px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md">
                                             <FiStar size={10} fill="currentColor" /> Featured
                                         </div>
                                     </div>
                                 )}
 
-                                {/* Card Header / Image Area */}
-                                <div className={`h-52 relative overflow-hidden bg-gradient-to-br ${project.color}`}>
+                                {/* Card Header / Emoji Icon Area */}
+                                <div className={`h-48 relative overflow-hidden bg-gradient-to-br ${project.color} flex items-center justify-center`}>
                                     {/* Overlay Pattern */}
-                                    <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat mix-blend-overlay"></div>
+                                    <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#0B3331_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
                                     {/* Emoji Icon */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="text-8xl filter drop-shadow-2xl transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-700">
-                                            {project.image}
-                                        </div>
+                                    <div className="text-7xl filter drop-shadow-lg transform group-hover:scale-108 group-hover:rotate-6 transition-transform duration-700">
+                                        {project.image}
                                     </div>
-
-                                    {/* Overlay Gradient on Hover */}
-                                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-8 flex flex-col flex-grow">
+                                <div className="p-6 flex flex-col flex-grow text-left">
                                     <div className="mb-4">
-                                        <div className="flex flex-wrap gap-2 mb-3">
+                                        <div className="flex flex-wrap gap-1.5 mb-3">
                                             {project.tags.slice(0, 3).map((tag, i) => (
                                                 <span
                                                     key={i}
-                                                    className="px-2.5 py-1 bg-[#335c67]/5 text-[#335c67] text-[10px] font-bold uppercase tracking-wider rounded-md border border-[#335c67]/10"
+                                                    className="px-2.5 py-1 bg-[#0B3331]/5 text-[#0B3331] text-[9px] font-sans font-bold uppercase tracking-wider rounded border border-[#0B3331]/5"
                                                 >
                                                     {tag}
                                                 </span>
                                             ))}
                                             {project.tags.length > 3 && (
-                                                <span className="px-2.5 py-1 bg-[#335c67]/5 text-[#335c67] text-[10px] font-bold rounded-md border border-[#335c67]/10">+{project.tags.length - 3}</span>
+                                                <span className="px-2 py-0.5 bg-[#0B3331]/5 text-[#0B3331]/75 text-[9px] font-sans font-bold rounded">+{project.tags.length - 3}</span>
                                             )}
                                         </div>
-                                        <h3 className="text-2xl font-black text-[#335c67] mb-2 group-hover:text-[#e09f3e] transition-colors duration-300 leading-tight">
+                                        <h3 className="text-xl font-serif font-black text-[#0B3331] mb-2 group-hover:text-[#EE9372] transition-colors duration-300 leading-tight">
                                             {project.title}
                                         </h3>
-                                        <p className="text-[#335c67]/70 text-sm leading-relaxed line-clamp-3">
+                                        <p className="text-[#0B3331]/70 font-sans text-xs sm:text-sm leading-relaxed line-clamp-3">
                                             {project.description}
                                         </p>
                                     </div>
 
                                     {/* Actions */}
-                                    <div className="mt-auto pt-6 border-t border-[#335c67]/10 flex items-center justify-between">
+                                    <div className="mt-auto pt-4 border-t border-[#0B3331]/5 flex items-center justify-between">
                                         <a
                                             href={project.github}
-                                            className="flex items-center gap-2 text-[#335c67]/70 hover:text-[#335c67] text-sm font-bold transition-colors group/btn"
+                                            className="flex items-center gap-1.5 text-[#0B3331]/70 hover:text-[#EE9372] text-xs font-sans font-bold transition-colors uppercase tracking-wider"
                                         >
-                                            <FiGithub size={18} />
-                                            <span className="group-hover/btn:underline decoration-2 underline-offset-4 decoration-[#e09f3e]">Code</span>
+                                            <FiGithub size={15} />
+                                            <span>Code</span>
                                         </a>
                                         <a
                                             href={project.live}
-                                            className="flex items-center gap-2 px-4 py-2 bg-[#335c67] text-white text-sm font-bold rounded-lg hover:bg-[#e09f3e] transition-all duration-300 shadow-md hover:shadow-lg transform active:scale-95"
+                                            className="flex items-center gap-1.5 px-4 py-2 bg-[#0B3331] text-[#FDF8F3] hover:bg-[#EE9372] hover:text-[#0B3331] text-xs font-sans font-bold rounded-full transition-all duration-300 shadow-md transform active:scale-95"
                                         >
-                                            Live Demo <FiExternalLink size={16} />
+                                            Demo <FiExternalLink size={13} />
                                         </a>
                                     </div>
                                 </div>
@@ -232,9 +228,9 @@ const AllProjects = () => {
                     {/* Empty State */}
                     {filtered.length === 0 && (
                         <div className="text-center py-20">
-                            <div className="inline-block p-6 rounded-full bg-[#f0f0f0] mb-4 text-4xl">🤔</div>
-                            <h3 className="text-2xl font-bold text-[#335c67] mb-2">No projects found</h3>
-                            <p className="text-[#335c67]/60">Try selecting a different category.</p>
+                            <div className="inline-block p-6 rounded-full bg-[#0B3331]/5 mb-4 text-4xl">🤔</div>
+                            <h3 className="text-xl font-serif font-black text-[#0B3331] mb-2">No projects found</h3>
+                            <p className="text-[#0B3331]/60 font-sans text-sm">Try selecting a different category.</p>
                         </div>
                     )}
                 </div>
